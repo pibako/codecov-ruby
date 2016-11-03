@@ -123,6 +123,9 @@ class SimpleCov::Formatter::Codecov
 
     # Jenkins
     # --------
+      
+    puts "CODECOV:: DEBUG"
+    puts "CODECOV:: #{ENV.inspect}"
     elsif ENV['JENKINS_URL'] != nil
         # https://wiki.jenkins-ci.org/display/JENKINS/Building+a+software+project
         # https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin#GitHubpullrequestbuilderplugin-EnvironmentVariables
@@ -176,12 +179,14 @@ class SimpleCov::Formatter::Codecov
       params[:slug] = ENV['TEAMCITY_BUILD_REPOSITORY'].split('/', 4)[-1].sub('.git', '')
     end
 
+    puts "CODECOV:: before branch"
     if params[:branch] == nil
         # find branch, commit, repo from git command
         branch = `git rev-parse --abbrev-ref HEAD`.strip
         params[:branch] = branch != 'HEAD' ? branch : 'master'
     end
 
+    puts "CODECOV:: before commit"
     if params[:commit] == nil
         params[:commit] = `git rev-parse HEAD`.strip
     end
