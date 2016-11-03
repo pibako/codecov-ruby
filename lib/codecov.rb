@@ -179,6 +179,8 @@ class SimpleCov::Formatter::Codecov
       params[:slug] = ENV['TEAMCITY_BUILD_REPOSITORY'].split('/', 4)[-1].sub('.git', '')
     end
 
+    puts "CODECOV:: before params are: #{params}"
+    
     puts "CODECOV:: before branch"
     if params[:branch] == nil
         # find branch, commit, repo from git command
@@ -191,6 +193,8 @@ class SimpleCov::Formatter::Codecov
         params[:commit] = `git rev-parse HEAD`.strip
     end
 
+    puts "CODECOV:: after params are: #{params}"
+    
     slug = ENV['CODECOV_SLUG']
     if slug != nil
         params[:slug] = slug
