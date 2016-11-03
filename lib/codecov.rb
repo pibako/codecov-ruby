@@ -25,6 +25,9 @@ class SimpleCov::Formatter::Codecov
     # add params
     params = {"token" => ENV['CODECOV_TOKEN']}
 
+    puts "CODECOV:: DEBUG"
+    puts "CODECOV:: #{ENV.inspect}"
+    
     # Travis CI
     # ---------
     if ENV['CI'] == "true" and ENV['TRAVIS'] == "true"
@@ -124,9 +127,8 @@ class SimpleCov::Formatter::Codecov
     # Jenkins
     # --------
       
-    puts "CODECOV:: DEBUG"
-    puts "CODECOV:: #{ENV.inspect}"
     elsif ENV['JENKINS_URL'] != nil
+        puts "CODECOV:: In Jenkins"
         # https://wiki.jenkins-ci.org/display/JENKINS/Building+a+software+project
         # https://wiki.jenkins-ci.org/display/JENKINS/GitHub+pull+request+builder+plugin#GitHubpullrequestbuilderplugin-EnvironmentVariables
         params[:service] = 'jenkins'
